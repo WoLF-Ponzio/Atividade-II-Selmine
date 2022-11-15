@@ -6,6 +6,7 @@ public class Exercício_2 {
 		Scanner teclado = new Scanner(System.in);
 		int[]numero = new int[10];
 		int valor;
+		boolean check;
 	
 		System.out.println("Gerador e Ordenador de números");
 		preencher(numero);
@@ -15,7 +16,12 @@ public class Exercício_2 {
 		imprimir(numero);
 		System.out.print("\nDigite um valor para busca: ");
 		valor = teclado.nextInt();
-		checagem(numero, valor);
+		check = checagem(numero, valor);
+		if(check == true) {
+			System.out.println(check + ", o número está na lista");
+		}else {
+			System.out.println(check + ", o número não se encontra na lista");
+		}
 	}
 
 	public static void preencher(int[]numero) {
@@ -53,43 +59,40 @@ public class Exercício_2 {
 		
 	}
 	
-	public static void checagem(int[]numero, int valor) {
+	public static boolean checagem(int[]numero, int valor) {
 		int aux, indice;
 		boolean teste = false;
 		indice = (numero.length/2) - 1;
 		aux = (numero[indice]);
 		if(valor == aux) {
 			teste = true;
-			System.out.println(teste + ", o número está na " + (indice + 1) + "º posição");
+			return teste;
 		}else {
 			if(valor > aux){
 				for(int i = (indice+1); i < numero.length; i++) {
 					if(numero[i] == valor) {
 						teste = true;
-						System.out.println(teste + ", o número está na " + (i + 1) + "º posição");
-						return;
+						return teste;
 					}else {
 						teste = false;
 					}
 				}
-					if(teste == false) {
-						System.out.println(teste + ", o número não se encontra na lista");
-					}
+					return teste;
 					
 			}else if(valor < aux){
 				for(int i = (indice-1); i > -1; i--) {
 					if(numero[i] == valor) {
 						teste = true;
-						System.out.println(teste + ", o número está na " + (i + 1) + "º posição");
+						return teste;
 					}else {
 						teste = false;
 					}
 				}
 				if(teste == false) {
-					System.out.println(teste + ", o número não se encontra na lista");
+					return teste;
 				}
 			}
 		}
+		return teste;
 	}
-
 }
